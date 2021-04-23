@@ -1,3 +1,6 @@
+const { inDev } = require('./webpack.helpers');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+
 module.exports = [
   {
     // Typescript loader
@@ -13,13 +16,16 @@ module.exports = [
   {
     // CSS Loader
     test: /\.css$/,
-    use: [{ loader: 'style-loader' }, { loader: 'css-loader' }],
+    use: [
+      { loader: inDev() ? 'style-loader' : MiniCssExtractPlugin.loader },
+      { loader: 'css-loader' },
+    ],
   },
   {
     // Less loader
     test: /\.less$/,
     use: [
-      { loader: 'style-loader' },
+      { loader: inDev() ? 'style-loader' : MiniCssExtractPlugin.loader },
       { loader: 'css-loader' },
       { loader: 'less-loader' },
     ],

@@ -1,17 +1,17 @@
-const rules = require('./webpack.rules');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
   mode: 'production',
   entry: ['./src/main.tsx'],
   module: {
-    rules,
+    rules: require('./webpack.rules'),
   },
   output: {
     filename: '[name].[chunkhash].js',
     chunkFilename: '[name].[chunkhash].chunk.js',
     clean: true,
   },
-  plugins: require('./webpack.plugins'),
+  plugins: [...require('./webpack.plugins')],
   resolve: {
     extensions: ['.js', '.ts', '.jsx', '.tsx', '.css'],
     alias: {
@@ -31,9 +31,9 @@ module.exports = {
       minSize: 0,
       cacheGroups: {
         vendor: {
-            name: "vendors",
-            test: /[\\/]node_modules[\\/]/,
-            chunks: "all",
+          name: 'vendors',
+          test: /[\\/]node_modules[\\/]/,
+          chunks: 'all',
         },
       },
     },
