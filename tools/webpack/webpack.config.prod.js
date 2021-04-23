@@ -1,5 +1,3 @@
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-
 module.exports = {
   mode: 'production',
   entry: ['./src/main.tsx'],
