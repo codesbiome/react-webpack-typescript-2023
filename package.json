@@ -5,7 +5,8 @@
   "license": "MIT",
   "scripts": {
     "start": "cross-env NODE_ENV=development webpack serve --config tools/webpack/webpack.config.dev.js",
-    "build": "cross-env NODE_ENV=production webpack --config tools/webpack/webpack.config.prod.js"
+    "build": "cross-env NODE_ENV=production webpack --config tools/webpack/webpack.config.prod.js",
+    "lint": "eslint --ext .js,.jsx,.ts,.tsx src/"
   },
   "devDependencies": {
     "@marshallofsound/webpack-asset-relocator-loader": "^0.5.0",
