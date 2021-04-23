@@ -63,12 +63,14 @@ yarn lint
 
 <br />
 
-## Package : Production
+## Build : Production
 
-Customize and package your Electron app with OS-specific bundles (.app, .exe etc)
+Distribution files output will be generated in `dist/` directory by default.
+
+To build the production ready files for distribution, use the following command :
 
 ```bash
-yarn package
+yarn build
 ```
 
 <br />
