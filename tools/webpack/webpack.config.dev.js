@@ -1,10 +1,8 @@
-const rules = require('./webpack.rules');
-
 module.exports = {
   mode: 'development',
   entry: ['./src/main.tsx'],
   module: {
-    rules,
+    rules: require('./webpack.rules'),
   },
   output: {
     filename: '[name].js',
@@ -23,6 +21,7 @@ module.exports = {
   stats: 'errors-warnings',
   devtool: 'cheap-module-source-map',
   devServer: {
+    open: true,
     stats: 'errors-warnings',
     hot: true,
   },
