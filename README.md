@@ -1,4 +1,4 @@
-# React Webpack Typescript - Boilerplate (2021)
+# React Webpack Typescript - Boilerplate (2022)
 
 Minimal boilerplate for writing Web Applications using React, Webpack & TypeScript. This project makes use of latest packages like `react`, `typescript` & `webpack` to serve the best environment for development.
 
