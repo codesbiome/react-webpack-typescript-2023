@@ -1,51 +1,122 @@
-import React, { useState } from 'react';
-import { hot } from 'react-hot-loader';
-import logo from '@assets/images/logo.png';
-import './Application.less';
+import React, { useEffect, useState } from 'react';
+import './Application.scss';
+import { icons } from './Icons';
 
-type Props = {
-  title: string;
-  version: string;
-};
-
-const Application: React.FC<Props> = (props) => {
+const Application: React.FC = () => {
   const [counter, setCounter] = useState(0);
+  const [darkTheme, setDarkTheme] = useState(true);
+
+  /**
+   * On component mount
+   */
+  useEffect(() => {
+    const useDarkTheme = parseInt(localStorage.getItem('dark-mode'));
+    if (isNaN(useDarkTheme)) {
+      setDarkTheme(true);
+    } else if (useDarkTheme == 1) {
+      setDarkTheme(true);
+    } else if (useDarkTheme == 0) {
+      setDarkTheme(false);
+    }
+  }, []);
+
+  /**
+   * On Dark theme change
+   */
+  useEffect(() => {
+    if (darkTheme) {
+      localStorage.setItem('dark-mode', '1');
+      document.body.classList.add('dark-mode');
+    } else {
+      localStorage.setItem('dark-mode', '0');
+      document.body.classList.remove('dark-mode');
+    }
+  }, [darkTheme]);
+
+  /**
+   * Toggle Theme
+   */
+  function toggleTheme() {
+    setDarkTheme(!darkTheme);
+  }
 
   return (
-    <React.Fragment>
-      <main>
+    <div id='erwt'>
+      <div className='header'>
         <div className='main-heading'>
-          <img src={logo} width='32' title='Codesbiome' />
-          <h1>{props.title}</h1>
+          <h1 className='themed'>React Webpack Typescript</h1>
         </div>
-        <p className='main-teaser'>
-          Custom boilerplate for rapid development of Web Applications.
-          <br />
-          This project makes use of React, Webpack, TypeScript to
-          serve the best environment for development with hot-reloading of
-          modules.
-        </p>
+        <div className='main-teaser'>
+          <div>
+            Robust boilerplate for Desktop Applications with Electron and
+            ReactJS. Hot Reloading is used in this project for fast development
+            experience.
+            <br />
+            If you think the project is useful enough, just spread the word
+            around!
+          </div>
+        </div>
         <div className='versions'>
-          <span>
-            RWT <span>{props.version}</span>
-          </span>
-          <span>
-            React <span>{React.version}</span>
-          </span>
+          <div className='item'>
+            <div>
+              <img className='item-icon' src={icons.erwt} /> ERWT
+            </div>
+          </div>
+          <div className='item'>
+            <div>
+              <img className='item-icon' src={icons.typescript} /> Typescript
+            </div>
+          </div>
+          <div className='item'>
+            <div>
+              <img className='item-icon' src={icons.react} /> React
+            </div>
+          </div>
+          <div className='item'>
+            <div>
+              <img className='item-icon' src={icons.webpack} /> Webpack
+            </div>
+          </div>
+          <div className='item'>
+            <div>
+              <img className='item-icon' src={icons.chrome} /> Chrome
+            </div>
+          </div>
+          <div className='item'>
+            <div>
+              <img className='item-icon' src={icons.license} /> License
+            </div>
+          </div>
         </div>
-        <p className='main-teaser small'>
-          Click below button to update the application &quot;counter&quot;
-          state. Components will update their states using
-          Hot-Module-Replacement technique, without needing to refresh/reload
-          whole application.
-        </p>
-        <br />
-        <button onClick={() => setCounter(counter + 1)}>
-          Counter <span>{counter}</span>
-        </button>
-      </main>
-    </React.Fragment>
+      </div>
+
+      <div className='footer'>
+        <div className='center'>
+          <button
+            onClick={() => {
+              if (counter > 99) return alert('Going too high!!');
+              setCounter(counter + 1);
+            }}
+          >
+            Increment {counter != 0 ? counter : ''} <span>{counter}</span>
+          </button>
+          &nbsp;&nbsp; &nbsp;&nbsp;
+          <button
+            onClick={() => {
+              if (counter == 0) return alert('Oops.. thats not possible!');
+              setCounter(counter > 0 ? counter - 1 : 0);
+            }}
+          >
+            Decrement <span>{counter}</span>
+          </button>
+          &nbsp;&nbsp; &nbsp;&nbsp;
+          <button onClick={toggleTheme}>
+            {darkTheme ? 'Light Theme' : 'Dark Theme'}
+          </button>
+        </div>
+      </div>
+    </div>
   );
 };
 
-export default hot(module)(Application);
+export default Application;
