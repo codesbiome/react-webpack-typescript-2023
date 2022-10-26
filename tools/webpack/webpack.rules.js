@@ -22,6 +22,15 @@ module.exports = [
     ],
   },
   {
+    // SCSS (SASS) Loader
+    test: /\.s[ac]ss$/i,
+    use: [
+      { loader: inDev() ? 'style-loader' : MiniCssExtractPlugin.loader },
+      { loader: 'css-loader' },
+      { loader: 'sass-loader' },
+    ],
+  },
+  {
     // Less loader
     test: /\.less$/,
     use: [
@@ -31,29 +40,12 @@ module.exports = [
     ],
   },
   {
-    // Images Loader
-    test: /\.(gif|jpe?g|tiff|png|webp|bmp|svg)$/,
-    use: [
-      {
-        loader: 'file-loader',
-        options: {
-          publicPath: 'assets/images',
-          outputPath: 'assets/images',
-        },
-      },
-    ],
-  },
-  {
-    // Font & SVG loader
-    test: /\.(woff(2)?|ttf|otf|eot)$/,
-    use: [
-      {
-        loader: 'file-loader',
-        options: {
-          publicPath: 'assets/fonts',
-          outputPath: 'assets/fonts',
-        },
-      },
-    ],
+    // Assets loader
+    // More information here https://webpack.js.org/guides/asset-modules/
+    test: /\.(gif|jpe?g|tiff|png|webp|bmp|svg|eot|ttf|woff|woff2)$/i,
+    type: 'asset',
+    generator: {
+      filename: 'assets/[hash][ext][query]',
+    },
   },
 ];
